@@ -8,9 +8,9 @@ diversos modelos de LLM.
 As páginas dos respectivos projetos são:
 
 
-[Veja mais sobre o Docker](docker.md)
-[Veja mais sobre o Ollama](ollama.md)
-[Veja mais sobre a WebUI](webui.md)
+[Veja mais sobre o Docker](docker.md)\n
+[Veja mais sobre o Ollama](ollama.md)\n
+[Veja mais sobre a WebUI](webui.md)\n
 
 
 ## Table of Contents

@@ -1,4 +1,13 @@
-# Instruões Gerais
+# Instruções Gerais
+
+Este tutorial serve de guia e ajuda para instalação e uso de sistemas  baseados em Docker,
+bem como a execução de LLMs que utilizam a plataforma Ollama.
+Ainda trata de como usar a interface WebUI que permite interagir com servidores Ollama rodando
+diversos modelos de LLM.
+
+As páginas dos respectivos projetos são:
+
+
 # Docker
 # Ollama
 # WebUI

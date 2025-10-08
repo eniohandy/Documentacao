@@ -1,4 +1,5 @@
-# Docker - Manual para criação de containers, transferência para repositório, download em outro servidor e mais.
+# Docker
+Pequeno manual para criação de containers, transferência para repositório, download em outro servidor e mais.
 
 ## Capítulo I - Criação de Containers
 

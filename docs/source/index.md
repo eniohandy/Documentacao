@@ -5,6 +5,11 @@ bem como a execução de LLMs que utilizam a plataforma Ollama.
 Ainda trata de como usar a interface WebUI que permite interagir com servidores Ollama rodando
 diversos modelos de LLM.
 
+.. toctree::
+
+   usage
+   api
+
 As páginas dos respectivos projetos são:
 
 

@@ -1,0 +1,26 @@
+﻿Instruções para criar um ambiente virtual:
+
+
+1. Crie uma pasta
+2. No vscode (ou outro editor), abra a pasta do seu projeto
+3. Para começar, crie um arquivo de python (p.ex., main.py) e um arquivo de texto (o padrão é requirements.txt)
+4. Na barra de ajuda, procure por Create enviroment / venv / selecione a versão do python (pode ser a padrão). No meu computador, o vscode costuma reconhecer o arquivo requirements.txt, mas a instalação direta não funciona. Geralmente, ignoro essa parte e instalo separamente.
+5. Para toda a biblioteca que precisar, coloque o nome do arquivo .txt. Em seguida, no prompt, escreva: pip install -r requirements.txt
+6. Para rodar os arquivos de python, tem um botão em cima ou digite no terminal: python <nome do arquivo>
+
+
+obs.: se o terminal não estiver aparecendo, você pode procurar nas abas em cima. Tem algumas opções, como abrir um interpretador de python; em vez disso, escolha o bash.
+
+
+
+
+[Enio]
+Encontrei mais questões:
+
+
+Para ativar
+source /home/enio/pythondev/.venv/bin/activate
+
+
+Para desativar:
+deactivate

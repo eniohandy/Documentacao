@@ -1,0 +1,262 @@
+﻿Passos para execução do Ollama no Docker do servidor (S06) do CIAAM:
+
+
+A instalação do Docker é “rootless”, portanto não há necessidade do uso do ‘sudo’ para executar um contêiner. O comando utilizado é como segue:
+
+
+docker run -d \
+--gpus=all --runtime=nvidia --privileged \
+-p 11434:11434 \
+-v /mnt/files/grupo/docker_volumes/ollama:/root/.ollama \
+--name ollama \
+ollama/ollama
+
+
+
+
+Explicação dos parâmetros:
+
+
+docker run -d         →   Executa um contêiner no docker em modo daemon, ou seja, deixando-o ativo em background para responder a chamadas.
+
+
+--gpus=all --runtime=nvidia --privileged        →   Permite o uso de todas as GPUs disponíveis na máquina hospedeira e especifica o uso do runtime provido pelo Nvidia Container Toolkit, necessário para o uso de GPUs Nvidia. Também verifiquei que é necessário acrescentar o parâmetro --privileged para que o contêiner ganhe permissão de uso das GPUs. Os tutoriais a respeito do assunto tipicamente orientam que o arquivo de configuração global do Docker seja atualizado para que essas opções sejam padrão a todos os contêineres, daí a ausência desses parâmetros em muitas referências que se encontram online.
+
+
+-p 11434:11434        →   a opção -p mapeia um número de porta TCP na rede do contêiner para outro número na rede hospedeira, como se fosse um sistema NAT. Essa é a porta que recebe as requisições HTTP da API do Ollama.
+
+
+-v /mnt/files/grupo/docker_volumes/ollama:/root/.ollama        → Mapeia um caminho no sistema de arquivos do contêiner para um outro na máquina hospedeira. O diretório /root/.ollama é onde o contêiner armazena os arquivos dos modelos. Ao mapeá-lo abaixo do caminho /mnt/files garantimos que os arquivos com maior consumo de espaço estejam armazenados no sistema de arquivos apropriado do servidor S06.
+
+
+--name ollama        →   Atribui um nome para o contêiner, de modo a facilitar sua referência em outros comandos do docker (como faremos, por exemplo, para carregar ou executar modelos via terminal).
+
+
+ollama/ollama        →   O identificador da imagem no repositório central do Docker.
+
+
+Obs.: as barras invertidas ao final das linhas no comando foram acrescentadas para que o shell ignore as quebras de linha (caso o comando seja copiado e colado daqui).
+
+
+Encerrando e reiniciando o serviço 
+Uma vez que o comando acima tenha sido executado e o contêiner tenha sido criado, pode-se encerrar a execução do Ollama com o comando:
+
+
+docker stop ollama
+
+
+E a partir de então, como as configurações do contêiner permanecem salvas, pode-se reiniciar sua execução simplesmente pela diretiva:
+
+
+docker start ollama
+
+
+Recomenda-se encerrar a execução após seu uso para minimizar a exposição do servidor a acessos externos indevidos.
+
+
+Utilizando modelos via terminal
+
+
+Para executar comandos interativamente em um contêiner do Docker, utiliza-se o comando docker exec -it. O primeiro argumento será o nome do contêiner (“ollama”, no caso), e em seguida o comando a executar. Exemplo:
+
+
+docker exec -it ollama hostname
+
+
+O comando acima retorna um número correspondente ao hostname da máquina virtual Linux que executa o serviço do Ollama.
+Com esse recurso, podemos interagir com um LLM instalado no Ollama, utilizando o comando ollama run seguido do nome do modelo a executar. Se o modelo não estiver disponível localmente, o Ollama buscará em seu repositório por um modelo com o mesmo nome e instalará o modelo, se encontrado. Para executar a versão de 70 bilhões de parâmetros do LLM Llama 3.1, executamos:
+
+
+docker exec -it ollama ollama run llama3.1:70b
+
+
+E em seguida podemos interagir com o chatbot normalmente.
+
+
+
+
+Administração e diagnóstico
+
+
+Seguem alguns dos comandos mais importantes para o acompanhamento do serviço Ollama:
+
+
+docker ps         →   Lista os contêineres ativos do Docker.
+
+
+docker inspect ollama         →    Lista (em formato JSON) informações a respeito do contêiner (no caso, “ollama”).
+
+
+docker rm ollama                →   Elimina o contêiner “ollama”, permitindo que criemos um novo contêiner com o mesmo nome e parâmetros distintos.
+
+
+
+
+Execução do serviço Open Web-UI
+
+
+Assim como no caso do Ollama, como a instalação do Docker no servidor S06 é “rootless”, não há necessidade do uso do ‘sudo’ para criar e executar um contêiner. O comando utilizado é como segue:
+
+
+docker run -d \
+-p 3000:8080 \
+--add-host=host.docker.internal:host-gateway \
+-e OLLAMA_BASE_URL=<IP_DO_CONTEINER_OLLAMA>
+-v open-webui:/app/backend/data \
+--name open-webui \
+--restart always \
+ghcr.io/open-webui/open-webui:main
+
+
+onde <IP_DO_CONTEINER_OLLAMA> deve ser substituído pelo endereço IP do contêiner Ollama na rede interna do Docker, que pode ser obtido pelo comando:
+
+
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' ollama
+
+
+Explicação dos parâmetros:
+
+
+docker run -d         →   Executa um contêiner no docker em modo daemon, ou seja, deixando-o ativo em background para responder a chamadas.
+
+
+-p 3000:8080        →   a opção -p mapeia um número de porta TCP na rede do contêiner para outro número na rede hospedeira, como se fosse um sistema NAT. Neste caso, a interface Web da ferramente ficará disponível na porta 3000 do servidor.
+
+
+--add-host=host.docker.internal:host-gateway         →   Cria uma entrada no arquivo /etc/hosts do contêiner para mapeamento do nome host.docker.internal ao endereço IP do gateway da rede interna do Docker,  criando a rota necessária para localização dos demais contêineres em execução.
+
+
+-e OLLAMA_BASE_URL=<IP_DO_CONTEINER_OLLAMA>                →   Cria uma variável de ambiente no contêiner chamada OLLAMA_BASE_URL, que é referenciada pelo software para localizar a instalação do Ollama que será utilizada. O endereço IP fornecido tem de corresponder ao atribuído ao contêiner Ollama, e tipicamente será 172.17.0.2. Esta configuração pode ser modificada posteriormente pela própria interface Web.
+-v open-webui:/app/backend/data        → Cria um volume do Docker chamado “open-webui” para interação e gerenciamento de dados do diretório /app/backend/data do contêiner.
+
+
+--name open-webui        →   Atribui um nome para o contêiner, de modo a facilitar sua referência em outros comandos do docker (como faremos, por exemplo, para carregar ou executar modelos via terminal).
+
+
+--restart always         → Indica que o contêiner deve ser reiniciado em caso de problema.
+
+
+ghcr.io/open-webui/open-webui:main        →   O identificador da imagem no repositório central do Docker.
+________________
+
+
+Referências e Testes executados 
+
+
+Testes na semana de CW 19
+
+
+
+
+Tudo começou com este:
+LLM Everywhere: Docker for Local and Hugging Face Hosting | Docker
+Verifiquei que o teste inicial não funcionou.
+
+
+
+
+Instalação do Docker no PC local
+Overview of Docker Hub | Docker Docs
+
+
+
+
+
+
+Instalação do Ollama
+Há muitas informações e tutoriais:
+ollama/ollama - Docker Image | Docker Hub
+Link para baixar a imagem docker
+
+
+
+
+Este pacote permite o uso dos vários LLMs. Instala cada um, conforme é chamado.
+
+
+
+
+
+
+A interface web, que deve facilitar o uso é:
+🏡 Home | Open WebUI
+
+
+🛠️ Troubleshooting | Open WebUI
+Na página do troubleshooting é que tem a arquitetura, inclusive a questão das portas.
+
+
+Existe uma versão lite, ainda não testei
+Ollama | liteLLM
+
+
+
+
+Explicação geral:
+How to Run Llama 3 Locally with Ollama and Open WebUI - DEV Community
+
+
+Aqui há uma lista com muitas LLMs, suportadas.
+library (ollama.com)
+Basta fazer a chamada:
+docker exec -it ollama ollama run zephyr
+
+
+—
+
+
+Este é um tutorial do Marlon.
+C4AI/arandu_user_guide (github.com)
+
+
+—
+
+
+[1/6/24]
+Hoje fiz um teste com docker e llama3
+
+
+para rodar no servidor do CIAAM (s03):
+1. conectar. Para facilitar, fiz uma chave publica e privada.
+Tem que salvar ambas na pasta pessoal .ssh
+No servidor, na subpasta, dentro da pasta home, criar o arquivo authorizes_keys e colar a chave pública.
+No PC, na pasta HOME/.ssh, deixar a chave privada.
+Incluir o sistema de autenticação no terminal, usando a autenticação por chave.
+
+
+2. No servidor, chamar o docker do ollama:
+- docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+[a]
+isso deixa o serviço ollama rodando.
+- docker exec -it ollama ollama run llama3
+isso roda o llama3 de modo interativo no terminal.
+
+
+Ainda não descobri como rodar aquele WebUI
+ docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=200.144.192.69 -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+
+
+Ele abre a página da porta 3000 mas parece que não encontra o llm.
+
+
+
+
+
+
+[4/7/24]
+
+
+Teste na s06
+
+
+usuário criado enio@ciaam.org.br - ciaam24#
+
+
+
+
+—
+
+
+
+
+[a]Ver abaixo um comando mais completo.

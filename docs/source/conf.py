@@ -33,3 +33,18 @@ html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
+
+# atualizado para aceitar notação Markdown
+
+extensions = [
+    'myst_parser',
+    # other extensions...
+]
+
+myst_enable_extensions = [
+    "deflist",
+    "colon_fence",
+    "html_admonition",
+    "html_image",
+]
+

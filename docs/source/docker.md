@@ -4,7 +4,7 @@ Pequeno manual para criação de containers, transferência para repositório, d
 ## Capítulo I - Criação de Containers
 
 
-Criar container
+### Criar container
 
 
 Instalação do docker desktop
@@ -14,11 +14,13 @@ Se tiver a imagem instalada (“welcome to docker” p. ex.), executar. Ela vai 
 Acessar via localhost e porta.
 
 PARA SABER EM QUE PORTA ESTÁ RESPONDENDO:
-
+```python 
 docker ps - aparece na coluna port
+```
 ou
+```python 
 docker port ID
-
+``` 
 
 Baixar uma imagem e fazer a imagem
 
@@ -36,7 +38,7 @@ e.g.
 
 ``` python
 # usa imagem bitnami mais enxuta debian
-e instala utils que tem ping
+# e instala utils que tem ping
 FROM  bitnami/minideb:latest
 RUN apt-get update && apt-get install -y iputils-ping
 ```
@@ -59,14 +61,17 @@ docker login -u your-dockerhub-username
 Se estiver usando o docker desktop, ele normalmente já está logado.
 
 para mandar ao repositório.
+```python 
 docker push your-dockerhub-username/my-image:tag
-
+``` 
 Depois, no outro servidor, baixar:
+```python 
 docker pull your-dockerhub-username/my-image:tag
-
+``` 
 e rodar:
+```python 
 docker run [OPTIONS] your-dockerhub-username/my-image:tag
-
+``` 
 
 
 

@@ -5,10 +5,10 @@ bem como a execução de LLMs que utilizam a plataforma Ollama.
 Ainda trata de como usar a interface WebUI que permite interagir com servidores Ollama rodando
 diversos modelos de LLM.
 
-As páginas dos respectivos projetos são:
+As páginas dos respectivos projetos na internet são:
 
 
-[Veja mais sobre o Docker](docker.md)<br>
+[Veja mais sobre o Docker](<a href="https://www.docker.com/"></a>)<br>
 [Veja mais sobre o Ollama](ollama.md)<br>
 [Veja mais sobre a WebUI](webui.md)<br>
 

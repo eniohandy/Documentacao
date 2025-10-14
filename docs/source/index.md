@@ -23,9 +23,9 @@ As páginas dos respectivos projetos são:
 <a name="docker"></a>
 ## 1. Sobre Docker
 
-
-
-
+```python 
+docker ps
+``` 
 
 
 <a name="ollama"></a>

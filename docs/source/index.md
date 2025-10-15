@@ -8,9 +8,9 @@ diversos modelos de LLM.
 As páginas dos respectivos projetos na internet são:
 
 
-(<a href="https://www.docker.com/">Link ao site Docker</a>)<br>
-(<a href="https://www.ollama.com/">Link ao site Ollama</a>)<br>
-(<a href="https://www.webui.com/https://github.com/open-webui/open-webui">Link ao site Open WebUI</a>)<br>
+<a href="https://www.docker.com/">Link ao site Docker</a><br>
+<a href="https://www.ollama.com/">Link ao site Ollama</a><br>
+<a href="https://github.com/open-webui/open-webui">Link ao site Open WebUI</a><br>
 
 
 

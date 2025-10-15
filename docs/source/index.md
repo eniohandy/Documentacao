@@ -8,7 +8,7 @@ diversos modelos de LLM.
 As páginas dos respectivos projetos na internet são:
 
 
-[Veja mais sobre o Docker](<a href="https://www.docker.com/"></a>)<br>
+[Veja mais sobre o Docker](<a href="https://www.docker.com/">Link ao site Docker</a>)<br>
 [Veja mais sobre o Ollama](ollama.md)<br>
 [Veja mais sobre a WebUI](webui.md)<br>
 

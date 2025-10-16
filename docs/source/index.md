@@ -22,31 +22,10 @@ As páginas dos respectivos projetos na internet são:
 4. [Contact](#contact)
 <br><br>
 
-<a name="docker"></a>
-## 1. Sobre Docker
 
-```python 
-docker ps
-``` 
-
-
-<a name="ollama"></a>
-## 2. Sobre Ollama
-
-``` python
-docker compose exec ollama ollama pull smollm2:135m
-```
-
-
-
-
-<a name="webui"></a>
-## 3. Sobre Webui (open-webui)
-
-
-
-
-
-<a name="contact"></a>
 ## Contact
 me
+
+## Informações gerais
+Este site oferece informações gerais sobre o uso das ferramentas Docker, Ollama e WebUI.
+É mantido pelo grupo de IA Responsável da Poli-USP

@@ -84,6 +84,7 @@ Consegui criar uma imagem com jupyter notebook e ainda importei os pacotes da Ho
 
 Um uma pasta criada, editar o arquivo Dockerfile. Incluir:
 
+```python
 # Use an official Python runtime as a parent image
 FROM python:3.8
 
@@ -101,12 +102,14 @@ ENV NAME World
 
 # Run Jupyter Notebook when the container launches
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
-
+```
 
 Se quiser, pode incluir a linha 
 
+```python
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+```
 
 para o arquivo requirements. Lá eu coloquei os pacotes (pandas, seaborn, openai).
 

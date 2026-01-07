@@ -24,7 +24,7 @@ As páginas dos respectivos projetos na internet são:
 
 
 ## Contact
-me
+me@me
 
 ## Informações gerais
 Este site oferece informações gerais sobre o uso das ferramentas Docker, Ollama e WebUI.

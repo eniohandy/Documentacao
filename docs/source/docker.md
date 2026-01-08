@@ -131,3 +131,46 @@ o source do volume é o que existe na instalação. Em casa é diferente do trab
 O detalhe aqui é que criei o volume chamado vol_docker via docker desktop. Aí vc associa na hora de rodar. O volume fica acessível e pode guardar dados sem perder.
 
 Quando se abrir a página de acesso (localhost:8888, p.ex.), na console aparece o token que tem que usar para logar.
+
+Capítulo V - Docker, Ollama, WebUI
+
+docker-compose.yml
+```python
+services:
+  ollama:
+    image: ollama/ollama:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['1']   # use GPU 1 
+              capabilities: [gpu]    
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama:/root/.ollama
+    container_name: ollama
+    tty: true
+    restart: unless-stopped
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    volumes:
+      - open-webui:/app/backend/data
+    depends_on:
+      - ollama
+    ports:
+      - 3000:8080
+    environment:
+      - 'OLLAMA_BASE_URL=http://ollama:11434'
+      - 'WEBUI_SECRET_KEY='
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+
+volumes:
+  ollama: {}
+  open-webui: {}
+```

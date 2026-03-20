@@ -9,3 +9,8 @@ with some basic Sphinx docs.
 Read the tutorial here:
 
 https://docs.readthedocs.io/en/stable/tutorial/
+
+
+A página deste tutorial é aberta em:
+https://documentacaoia.readthedocs.io/en/latest/index.html
+

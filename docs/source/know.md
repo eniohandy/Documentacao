@@ -1,6 +1,6 @@
 # Kwonledge Base
 
-.. this page is to give hints about the many problems that appear with Docker, Ollama and so on.
+<!-- this page is to give hints about the many problems that appear with Docker, Ollama and so on. -->
 
 # About Ollama
 

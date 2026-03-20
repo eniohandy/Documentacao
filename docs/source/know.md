@@ -1,5 +1,8 @@
-#this is to give hints about the many problems that appear with Docker, Ollama and so on.
+# Kwonledge Base
 
+.. this page is to give hints about the many problems that appear with Docker, Ollama and so on.
+
+# About Ollama
 
 Sometimes start Ollama with docker gets stucked because it was started outside the Docker.
 To check that, run:

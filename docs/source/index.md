@@ -20,7 +20,8 @@ As páginas dos respectivos projetos na internet são:
 2. [Sobre Ollama](#ollama)
 3. [Sobre Webui - open webui](#webui)
 4. [Knowledge_Base](#know)
-5. [Contact](#contact)
+5. [Sobre Github](#github)
+6. [Contact](#contact)
 <br><br>
 
 

@@ -1,6 +1,6 @@
 Docker - Manual para criação de containers, transferência para repositório, download em outro servidor e mais.
 
-Capítulo I - criação de Containers
+# Capítulo I - criação de Containers
 
 
 Criar container
@@ -32,7 +32,7 @@ Editar o arquivo Dockerfile e incluir o que mais quiser.
 
 e.g.
 
-# usa imagem bitnami mais enxuta debian
+- usa imagem bitnami mais enxuta debian
 e instala utils que tem ping
 FROM  bitnami/minideb:latest
 RUN apt-get update && apt-get install -y iputils-ping
@@ -64,7 +64,7 @@ docker run [OPTIONS] your-dockerhub-username/my-image:tag
 
 
 
-Capítulo II - Gerando Container específicos
+# Capítulo II - Gerando Container específicos
 
 
 A partir deste post do medium: Setting Up and Running Jupyter Notebook in a Docker Container | by bhavya sharma | Medium
@@ -73,28 +73,28 @@ Consegui criar uma imagem com jupyter notebook e ainda importei os pacotes da Ho
 
 Um uma pasta criada, editar o arquivo Dockerfile. Incluir:
 
-# Use an official Python runtime as a parent image
+- Use an official Python runtime as a parent image
 FROM python:3.8
 
-# Set the working directory to /app
+- Set the working directory to /app
 WORKDIR /app
 
-# Install Jupyter Notebook
+- Install Jupyter Notebook
 RUN pip install jupyter
 
-# Make port 8888 available to the world outside this container
+- Make port 8888 available to the world outside this container
 EXPOSE 8888
 
-# Define environment variable
+- Define environment variable
 ENV NAME World
 
-# Run Jupyter Notebook when the container launches
+- Run Jupyter Notebook when the container launches
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
 
 
 Se quiser, pode incluir a linha 
 
-# Install any needed packages specified in requirements.txt
+- Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 para o arquivo requirements. Lá eu coloquei os pacotes (pandas, seaborn, openai).
@@ -120,7 +120,7 @@ Quando se abrir a página de acesso (localhost:8888, p.ex.), na console aparece 
 
 
 
-Capítulo III - Montando Volumes
+# Capítulo III - Montando Volumes
 
 
 Algumas imagens já tem os volumes definidos, type=volume (como é o caso das que eu montei como imagens holistic AI
@@ -131,7 +131,7 @@ docker run -d -it --name devtest --mount type=bind,source="C:\temp",target=/app 
 
 neste caso, o container montou uma imagem com a pasta C:\temp como /app. Isso fez com que os arquivos criados ficassem salvos na pasta temp do computador.
 
-Cap IV - Conectando a um Container
+# Cap IV - Conectando a um Container
 
 
 docker container attach my_image
@@ -143,7 +143,7 @@ Para abrir um prompt bash:
 
 docker exec -it <mycontainer> bash
 
-Cap V - Docker, Ollama e Webui
+# Cap V - Docker, Ollama e Webui
 
 
 How to use Ollama with Open WebUI with Docker and Docker Compose

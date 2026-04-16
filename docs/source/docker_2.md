@@ -153,8 +153,6 @@ Está no S11, na pasta test_docker_yml, o arquivo docker-compose.yaml
 
 Ele junta o Ollama e o Webui.
 
-a conta administrados é enio.handy@gmail.com e senha 12345678
-
 Mas, não aparece a opção de baixar llms
 
 dá para usar:

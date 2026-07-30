@@ -174,3 +174,21 @@ volumes:
   ollama: {}
   open-webui: {}
 ```
+
+
+## Capítulo III - Montando Volumes
+
+
+Algumas imagens já tem os volumes definidos, type=volume
+
+Mas pegando uma imagem sem volume, dá para:
+```python
+docker run -d -it --name devtest --mount type=bind,source="C:\temp",target=/app my_image
+```
+neste caso, o container montou uma imagem com a pasta C:\temp como /app. Isso fez com que os arquivos criados ficassem salvos na pasta temp do computador.
+
+E para saber o que existe de volumes na sua instalação?
+
+```python
+docker volume ls
+```

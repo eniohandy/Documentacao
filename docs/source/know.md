@@ -20,3 +20,6 @@ you have to stop it with:
 systemctl stop ollama.service
 ```
 para parar
+
+
+

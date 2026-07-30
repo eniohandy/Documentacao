@@ -7,3 +7,10 @@ Localmente os modelos funcionam mas são bastante limitados em termos de capacid
 
 Desenvolvi alguns scripts que ficam disponíveis em um repo github: <a href="https://github.com/eniohandy/metrics_test_repo.git" target="_blank"> Meu repo com scripts de teste de métricas</a><br>
 
+
+
+---
+
+Entendo melhor a linha de comandos
+
+

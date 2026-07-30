@@ -18,10 +18,11 @@ As páginas dos respectivos projetos na internet são:
 ## Table of Contents
 1. [Sobre Docker](#docker)
 2. [Sobre Ollama](#ollama)
-3. [Sobre Webui - open webui](#webui)
-4. [Knowledge_Base](#know)
-5. [Sobre Github](#github)
-6. [Contact](#contact)
+3. [Docker e Ollama](#docker_and_ollama)
+4. [Sobre Webui - open webui](#webui)
+5. [Knowledge_Base](#know)
+6. [Sobre Github](#github)
+7. [Contact](#contact)
 <br><br>
 
 
